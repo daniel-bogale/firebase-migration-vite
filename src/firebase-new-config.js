@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore";
 
-// import { getAnalytics } from "firebase/analytics";
+import { getAnalytics } from "firebase/analytics";
 
 
 console.log(import.meta.env.PROD);
@@ -10,14 +10,13 @@ const isProdMode = import.meta.env.PROD;
 
 console.log(isProdMode);
 
-console.log(import.meta.env.VITE_NO);
 
 
 
 
 
 const firebaseConfig =
-  isProdMode
+  isProdMode 
     ?
     {
       apiKey: import.meta.env.VITE_FIREBASE_API_KEY_PROD,
