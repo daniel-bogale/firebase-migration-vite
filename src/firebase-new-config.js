@@ -16,7 +16,7 @@ console.log(isProdMode);
 
 
 const firebaseConfig =
-  !isProdMode 
+  isProdMode 
     ?
     {
       apiKey: import.meta.env.VITE_FIREBASE_API_KEY_PROD,
