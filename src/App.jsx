@@ -1,4 +1,4 @@
-import { Input, Button } from '@mui/material';
+import { Input, Button,Typography } from '@mui/material';
 
 import { useEffect, useState } from "react";
 import "./App.css";
@@ -67,8 +67,8 @@ function App() {
       <Button variant="contained" onClick={createUser}>Create User</Button>
       {users.map((user) => (
         <div key={user.id}>
-          <h1> Name: {user.name}</h1>
-          <h2> Age: {user.age}</h2>
+          <Typography component="h1"> Name: {user.name}</Typography>
+          <Typography component="h2"> Age: {user.age}</Typography>
           <Button variant="contained" 
             onClick={() => {
               updateUser(user.id, user.age, user.id);
