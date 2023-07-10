@@ -1,6 +1,8 @@
+import { Input, Button } from '@mui/material';
+
 import { useEffect, useState } from "react";
 import "./App.css";
-import {db} from "./firebase-new-config";
+import { db } from "./firebase-new-config";
 import {
   collection,
   getDocs,
@@ -9,7 +11,6 @@ import {
   doc,
   deleteDoc,
 } from "firebase/firestore";
-
 
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
 
   const deleteUser = async (id) => {
     console.log("deleting");
-    
+
     const userDoc = doc(db, "users", id);
     await deleteDoc(userDoc);
   };
@@ -45,40 +46,43 @@ function App() {
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getUsers();
+    setInterval(() => {
+      getUsers();
+    }, 2000);
   }, []);
   return (
     <div className="App">
-      <input
+      <Input
         placeholder="Name..."
         onChange={(e) => {
           setNewName(e.target.value);
         }}
       />
-      <input
+      <Input
         placeholder="Age..."
         onChange={(e) => {
           setNewAge(e.target.value);
         }}
       />
-      <button onClick={createUser}>Create User</button>
+      <Button variant="contained" onClick={createUser}>Create User</Button>
       {users.map((user) => (
         <div key={user.id}>
           <h1> Name: {user.name}</h1>
           <h2> Age: {user.age}</h2>
-          <button
+          <Button variant="contained" 
             onClick={() => {
               updateUser(user.id, user.age, user.id);
             }}
           >
             Increase Age
-          </button>
-          <button
+          </Button>
+          <Button  variant="contained"
             onClick={() => {
               deleteUser(user.id);
             }}
           >
             Delete User
-          </button>
+          </Button>
         </div>
       ))}
     </div>
