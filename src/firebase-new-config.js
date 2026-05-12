@@ -1,18 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "@firebase/firestore";
 
-import { getAnalytics } from "firebase/analytics";
-
-
-console.log(import.meta.env.PROD);
-
 const isProdMode = import.meta.env.PROD;
-
-console.log(isProdMode);
-
-
-
-
 
 
 const firebaseConfig =
@@ -35,8 +24,6 @@ const firebaseConfig =
           .VITE_FIREBASE_MESSAGING_SENDER_ID_DEV,
         appId: import.meta.env.VITE_FIREBASE_APP_ID_DEV,
       }
-
-console.log(firebaseConfig);
 
 const app = initializeApp(firebaseConfig);
 

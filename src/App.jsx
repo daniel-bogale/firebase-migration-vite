@@ -21,22 +21,16 @@ function App() {
   const usersCollectionRef = collection(db, "users");
 
   const createUser = async () => {
-    console.log("creating");
-
     await addDoc(usersCollectionRef, { name: newName, age: +newAge });
   };
 
   const updateUser = async (id, age) => {
-    console.log("updating");
-
     const userDoc = doc(db, "users", id);
     const newFields = { age: +age + 1 };
     await updateDoc(userDoc, newFields);
   };
 
   const deleteUser = async (id) => {
-    console.log("deleting");
-
     const userDoc = doc(db, "users", id);
     await deleteDoc(userDoc);
   };
@@ -46,9 +40,8 @@ function App() {
       setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
     getUsers();
-    setInterval(() => {
-      getUsers();
-    }, 2000);
+    const handle = setInterval(getUsers, 2000);
+    return () => clearInterval(handle);
   }, []);
   return (
     <div className="App">
@@ -71,7 +64,7 @@ function App() {
           <Typography component="h2"> Age: {user.age}</Typography>
           <Button variant="contained" 
             onClick={() => {
-              updateUser(user.id, user.age, user.id);
+              updateUser(user.id, user.age);
             }}
           >
             Increase Age
